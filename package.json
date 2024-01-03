@@ -1,0 +1,28 @@
+{
+  "name": "foodie-delight",
+  "version": "1.0.0",
+  "description": "\"Food delivering App\"",
+  "main": "App.js",
+  "scripts": {
+    "start": "npx parcel index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Food"
+  ],
+  "author": "Dhaval",
+  "license": "ISC",
+  "dependencies": {
+    "@types/react": "^18.2.46",
+    "@types/react-dom": "^18.2.18",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.1"
+  },
+  "devDependencies": {
+    "parcel": "^2.10.3",
+    "postcss": "^8.4.32",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.4.0"
+  }
+}

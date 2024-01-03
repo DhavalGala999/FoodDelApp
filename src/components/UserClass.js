@@ -4,7 +4,7 @@ class UserClass extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 44,
+      count: 41,
     };
   }
   render() {

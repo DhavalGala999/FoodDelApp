@@ -1,41 +1,19 @@
 import RestrauntCard, { withPromotedLabel } from "./RestrauntCard";
-import { useState } from "react";
-import RestrauntCard from "./RestrauntCard";
+import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useFetchAllRestra from "../utils/useFetchAllRestra";
 import useOnlineStatus from "../utils/useOnlineStatus";
 
 export const Body = () => {
+  let restrauntLists = useFetchAllRestra();
+
+  useEffect(() => {
+    setFilteredRestrauntLists(restrauntLists);
+  }, [restrauntLists]);
+
   let [filteredRestrauntLists, setFilteredRestrauntLists] = useState([]);
   const [searchText, setSearchText] = useState("");
-  // let restraList = [
-  //   {
-  //     info: {
-  //       id: "792768",
-  //       name: "abCoffee",
-  //       cloudinaryImageId: "aa0cd92469594730d59a9c77b4506510",
-  //       costForTwo: "₹300 for two",
-  //       cuisines: ["Cafe", "Beverages", "Desserts", "Bakery"],
-  //       avgRating: 4.8,
-  //       avgRatingString: "4.8",
-  //     },
-  //   },
-  //   {
-  //     info: {
-  //       id: "792769",
-  //       name: "MCD",
-  //       cloudinaryImageId: "aa0cd92469594730d59a9c77b4506510",
-  //       costForTwo: "₹300 for two",
-  //       cuisines: ["Cafe", "Beverages", "Desserts", "Bakery"],
-  //       avgRating: 3,
-  //       avgRatingString: "4.8",
-  //     },
-  //   },
-  // ];
-
-  let restrauntLists = useFetchAllRestra();
-  filteredRestrauntLists = restrauntLists;
 
   const isOnline = useOnlineStatus();
   const RestrauntCardPromoted = withPromotedLabel(RestrauntCard);
@@ -47,6 +25,7 @@ export const Body = () => {
   if (restrauntLists.length === 0) {
     return <Shimmer />;
   }
+
   return (
     <div className="container">
       <div className="flex">
@@ -63,6 +42,7 @@ export const Body = () => {
           Top Rated Restraunts
         </button>
         <input
+          data-testid="searchInput"
           className="border border-gray-400 mx-4 p-1 h-min self-center"
           type="text"
           value={searchText}

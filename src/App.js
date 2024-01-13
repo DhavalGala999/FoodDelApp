@@ -7,15 +7,20 @@ import About from "./components/About";
 import Error from "./components/Error";
 import Contact from "./components/Contact";
 import RestrauntMenu from "./components/RestrauntMenu";
+import Cart from "./components/Cart";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import appStore from "./redux/appStore";
+import { Provider } from "react-redux";
 
 const AppLayout = () => {
   return (
-    <div className="app">
-      <Header />
-      <Outlet />
-    </div>
+    <Provider store={appStore}>
+      <div className="app">
+        <Header />
+        <Outlet />
+      </div>
+    </Provider>
   );
 };
 
@@ -39,6 +44,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/restraunts/:id",
         element: <RestrauntMenu />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
     errorElement: <Error />,

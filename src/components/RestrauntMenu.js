@@ -8,7 +8,7 @@ const RestrauntMenu = () => {
   const { id } = useParams();
   const [resInfo, resMenuDetails] = useRestrauntMenu(id);
 
-  const [showItems, setShowItems] = useState(0);
+  const [showItems, setShowItems] = useState(null);
 
   if (resInfo === null) {
     return <Shimmer />;
@@ -24,6 +24,7 @@ const RestrauntMenu = () => {
       </div>
       {resMenuDetails.map((restraunt, index) => (
         <div>
+          {console.log(restraunt)}
           <RestrauntMenuItems
             Key={restraunt.card.card.title}
             resData={restraunt}

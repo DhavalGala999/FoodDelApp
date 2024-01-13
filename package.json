@@ -5,7 +5,8 @@
   "main": "App.js",
   "scripts": {
     "start": "npx parcel index.html",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test-watch": "jest --watch"
   },
   "keywords": [
     "Food"
@@ -13,13 +14,23 @@
   "author": "Dhaval",
   "license": "ISC",
   "dependencies": {
+    "@babel/preset-react": "^7.23.3",
+    "@reduxjs/toolkit": "^2.0.1",
     "@types/react": "^18.2.46",
     "@types/react-dom": "^18.2.18",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^9.0.4",
     "react-router-dom": "^6.21.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.23.7",
+    "@babel/preset-env": "^7.23.8",
+    "@testing-library/jest-dom": "^6.2.0",
+    "@testing-library/react": "^14.1.2",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "parcel": "^2.10.3",
     "postcss": "^8.4.32",
     "process": "^0.11.10",

@@ -1,4 +1,8 @@
+
+
 Food Now is an online delivery platform where you can order food from any nearby restaurant.
+
+Live Site: https://dhavalgala999-foodnow.netlify.app/
 
 Technologies Used:
 

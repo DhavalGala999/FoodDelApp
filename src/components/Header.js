@@ -1,43 +1,34 @@
-import { NAV_LOGO } from "../utils/constants";
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import useOnlineStatus from "../utils/useOnlineStatus";
 import { useSelector } from "react-redux";
+import { IoMdHome } from "react-icons/io";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Header = () => {
-  const [btnName, setBtnName] = useState("Login");
-
-  const isOnline = useOnlineStatus();
-
   const cartItems = useSelector((store) => store.cart.items);
-  //console.log(cartItems);
   return (
-    <div className="flex justify-between">
-      <img className="w-40" src={NAV_LOGO}></img>
+    <div className="flex justify-between border border-black shadow-2xl">
+      <div className="flex items-center pl-9">
+        <img className="w-40" src={process.env.REACT_APP_NAV_LOGO}></img>
+      </div>
 
       <ul className="flex items-center">
-        <li className="p-4">Online Status: {isOnline ? "✅" : "🔴"}</li>
-        <li className="p-4">
-          <Link to="/">Home</Link>
+        <li className="font-bold p-4 sm:text-2xl">
+          <Link to="/">
+            <div className="flex items-center">
+              <div className="text-sm sm:text-2xl">
+                <IoMdHome />
+              </div>
+              <span>Home</span>
+            </div>
+          </Link>
         </li>
-        <li className="p-4">
-          <Link to="/about">About Us</Link>
-        </li>
-        <li className="p-4">
-          <Link to="/contact">Contact Us</Link>
-        </li>
-        <li className="p-4 font-bold text-lg">
-          <Link to="/cart">Cart - ({cartItems.length}) Items</Link>
-        </li>
-        <li className="p-4">
-          <button
-            className="middle none center mr-3 rounded-lg border border-gray-500 py-3 px-6 text-xs font-bold uppercase transition-all hover:opacity-75 focus:ring focus:ring-pink-200 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-            onClick={() => {
-              btnName === "Login" ? setBtnName("Logout") : setBtnName("Login");
-            }}
-          >
-            {btnName}
-          </button>
+        <li className="p-4 font-bold sm:text-2xl">
+          <Link to="/cart">
+            <div className="flex items-center mr-12">
+              <FaShoppingCart />
+              <span data-testid="cart"> ({cartItems.length})</span>
+            </div>
+          </Link>
         </li>
       </ul>
     </div>

@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import "@testing-library/jest-dom";
 
-it("Should load header component with login button", () => {
+it("Should load header component with Home and Cart", () => {
   render(
     <BrowserRouter>
       <Provider store={appStore}>
@@ -14,21 +14,24 @@ it("Should load header component with login button", () => {
     </BrowserRouter>
   );
 
-  const loginButton = screen.getByRole("button", { name: "Login" });
-  expect(loginButton).toBeInTheDocument();
+  const home = screen.getByText("Home");
+  expect(home).toBeInTheDocument();
+
+  const cart = screen.getAllByTestId("cart");
+  expect(cart).toBeInTheDocument();
 });
 
-it("Should test login button functionality", () => {
-  render(
-    <BrowserRouter>
-      <Provider store={appStore}>
-        <Header />
-      </Provider>
-    </BrowserRouter>
-  );
+// it("Should test login button functionality", () => {
+//   render(
+//     <BrowserRouter>
+//       <Provider store={appStore}>
+//         <Header />
+//       </Provider>
+//     </BrowserRouter>
+//   );
 
-  const loginButton = screen.getByRole("button", { name: "Login" });
-  fireEvent.click(loginButton);
-  const logoutButton = screen.getByRole("button", { name: "Logout" });
-  expect(logoutButton).toBeInTheDocument();
-});
+//   const loginButton = screen.getByRole("button", { name: "Login" });
+//   fireEvent.click(loginButton);
+//   const logoutButton = screen.getByRole("button", { name: "Logout" });
+//   expect(logoutButton).toBeInTheDocument();
+// });

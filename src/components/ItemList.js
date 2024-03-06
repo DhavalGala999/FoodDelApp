@@ -1,18 +1,24 @@
-import { RES_IMG_URL } from "../utils/constants";
 import { useDispatch } from "react-redux";
-import { addItems } from "../redux/cartSlice";
+import { addItems, removeitem } from "../redux/cartSlice";
+import { toast } from "react-toastify";
 
-const ItemList = ({ cardItems }) => {
+const ItemList = ({ cardItems, removeBtn }) => {
   const dispatch = useDispatch();
   const handleAddItem = (menuDetail) => {
     dispatch(addItems(menuDetail));
+    toast.success("Item added successfully!");
   };
+  const handleRemoveItem = (index) => {
+    dispatch(removeitem(index));
+    toast.success("Item removed successfully!");
+  };
+
   return (
     <div className="p-4 m-4">
-      {cardItems.map((menuDetail) => (
+      {cardItems.map((menuDetail, index) => (
         <div
           data-testid="foodItems"
-          key={menuDetail.card.info.id}
+          key={index}
           className="flex justify-between shadow-md"
         >
           <li className="list-none text-2xl">
@@ -21,25 +27,30 @@ const ItemList = ({ cardItems }) => {
               {menuDetail.card.info.price / 100 ||
                 menuDetail.card.info.defaultPrice / 100}
             </h5>
-
-            <p className="text-xs text-left mt-2 mb-2">
-              {menuDetail.card.info.description}
-            </p>
           </li>
           <div className="text-xl ">
             <button
-              className="absolute font-bold bg-black text-white rounded-lg text-sm p-1 mx-1"
+              className="relative font-bold bg-green-500 text-white rounded-lg text-sm px-3 py-2 mx-1 "
               onClick={() => handleAddItem(menuDetail)}
             >
               + Add
             </button>
+            {removeBtn && (
+              <button
+                className="relative font-bold bg-green-500 text-white rounded-lg text-sm py-2 px-1"
+                onClick={() => handleRemoveItem(index)}
+              >
+                - Remove
+              </button>
+            )}
             <img
               src={
-                RES_IMG_URL + menuDetail.card.info.imageId ||
-                menuDetail.card.info.id
+                process.env.REACT_APP_RES_IMG_URL +
+                (menuDetail.card.info.imageId || menuDetail.card.info.id)
               }
-              className="w-28"
-            ></img>
+              className="w-48 my-2"
+              alt="Menu Image"
+            />
           </div>
         </div>
       ))}

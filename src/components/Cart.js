@@ -1,28 +1,23 @@
 import { useSelector, useDispatch } from "react-redux";
 import ItemList from "./ItemList";
 import { clearCart } from "../redux/cartSlice";
-import { Link } from "react-router-dom";
+import EmptyCart from "./EmptyCart";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const handleClearCart = () => {
-    console.log("dis");
     dispatch(clearCart());
   };
 
+  const handleClick = () => {
+    toast.success("🦄 Order placed successfully");
+  };
   const cartItems = useSelector((store) => store.cart.items);
-  console.log(cartItems);
   return (
-    <div className="mt-4 mx-48 text-center">
-      <h1 className="font-bold text-lg">Cart Items</h1>
-
+    <div className="mt-4 mx-48 text-center h-full">
       {cartItems.length === 0 ? (
-        <div className="font-bold mt-6">
-          <p>Your Cart is empty.</p>
-          <button className="border text-white bg-blue-400 rounded-md p-2 m-2">
-            <Link to="/">Shop Now</Link>
-          </button>
-        </div>
+        <EmptyCart />
       ) : (
         <>
           <button
@@ -31,7 +26,25 @@ const Cart = () => {
           >
             Clear Cart
           </button>
-          <ItemList cardItems={cartItems} />
+          <ItemList cardItems={cartItems} removeBtn={true} />
+          <div>
+            <p className="font-bold text-2xl">
+              <span>Total Amount: &#8377;</span>
+              {cartItems.reduce((acc, curr) => {
+                return (
+                  acc +
+                  (curr.card.info.price / 100 ||
+                    curr.card.info.defaultPrice / 100)
+                );
+              }, 0)}
+            </p>
+          </div>
+          <button
+            className="bg-green-300 border border-black rounded-lg p-2 font-bold mt-4 mb-10"
+            onClick={handleClick}
+          >
+            Checkout
+          </button>
         </>
       )}
     </div>

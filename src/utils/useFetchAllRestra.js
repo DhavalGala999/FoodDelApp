@@ -8,16 +8,16 @@ const useFetchAllRestra = () => {
 
   const fetchData = async () => {
     try {
-      const data = await fetch(
-        "https://www.swiggy.com/mapi/homepage/getCards?lat=19.125345&lng=72.91805"
-      );
-      const json = await data.json();
-      //console.log("JSON", json);
+      const data = await fetch(process.env.REACT_APP_FETCH_RESTRA_LIST);
+      const jsonData = await data.json();
       setRestrauntLists(
-        json.data.success.cards[1].gridWidget.gridElements.infoWithStyle
-          .restaurants
+        jsonData.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants
+          ? jsonData.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+              ?.restaurants
+          : jsonData.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+              ?.restaurants
       );
-      //console.log("API call", restrauntLists);
     } catch (e) {
       console.log(e);
     }

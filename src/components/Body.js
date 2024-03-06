@@ -27,13 +27,13 @@ export const Body = () => {
   }
 
   return (
-    <div className="container">
-      <div className="flex">
+    <div className=" bg-slate-200">
+      <div className=" flex flex-col sm:flex sm:flex-row">
         <button
-          className="m-4 p-4 border border-green-400 font-bold rounded-lg font-sans "
+          className="m-4 p-4 border border-green-400 font-bold rounded-lg font-sans bg-white w-max self-center"
           onClick={() => {
             let filteredRestra = restrauntLists.filter(
-              (restra) => restra.info.avgRating > 4.5
+              (restra) => restra.info.avgRating > 4.3
             );
 
             setFilteredRestrauntLists(filteredRestra);
@@ -43,13 +43,13 @@ export const Body = () => {
         </button>
         <input
           data-testid="searchInput"
-          className="border border-gray-400 mx-4 p-1 h-min self-center"
+          className="border border-gray-400 mx-4 p-1 h-min self-center rounded-xl px-2 mb-4 sm:mb-0"
           type="text"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
         <button
-          className="border border-gray-400 rounded-md px-10 h-12 self-center text-black"
+          className="border border-gray-400 rounded-md px-10 h-12 self-center text-black bg-white"
           onClick={() => {
             let filteredrestraunt = restrauntLists.filter((res) =>
               res.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -60,7 +60,7 @@ export const Body = () => {
           Search
         </button>
       </div>
-      <div className="flex flex-wrap">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-items-center">
         {filteredRestrauntLists.map((restraunt) => {
           return (
             <Link

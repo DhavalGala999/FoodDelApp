@@ -12,6 +12,7 @@ const Cart = () => {
 
   const handleClick = () => {
     toast.success("🦄 Order placed successfully");
+    dispatch(clearCart());
   };
   const cartItems = useSelector((store) => store.cart.items);
   return (

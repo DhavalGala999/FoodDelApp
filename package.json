@@ -2,7 +2,6 @@
   "name": "foodie-delight",
   "version": "1.0.0",
   "description": "\"Food delivering App\"",
-  "main": "App.js",
   "scripts": {
     "start": "npx parcel index.html",
     "build": "parcel build index.html",
